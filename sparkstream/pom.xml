@@ -5,7 +5,7 @@
   <version>1.0-SNAPSHOT</version>
   <inceptionYear>2008</inceptionYear>
   <properties>
-    <scala.version>2.12.8</scala.version>
+    <scala.version>2.11.8</scala.version>
     <kafka.version>2.1.1</kafka.version>
     <spark.version>2.4.0</spark.version>
     <hadoop.version>2.7.3</hadoop.version>
@@ -31,21 +31,27 @@
     <!--Spark Streaming-->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-streaming_2.12</artifactId>
+      <artifactId>spark-streaming_2.11</artifactId>
       <version>${spark.version}</version>
     </dependency>
 
     <!--Spark SQL-->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.12</artifactId>
+      <artifactId>spark-sql_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
       <version>${spark.version}</version>
     </dependency>
 
 
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-scala_2.12</artifactId>
+      <artifactId>jackson-module-scala_2.11</artifactId>
       <version>2.6.7.1</version>
     </dependency>
 
@@ -55,12 +61,23 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
 
 
     <!--Kafka-->
     <dependency>
       <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka_2.12</artifactId>
+      <artifactId>kafka_2.11</artifactId>
+      <version>${kafka.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
       <version>${kafka.version}</version>
     </dependency>
 
@@ -83,6 +100,7 @@
       <version>${hbase.version}</version>
     </dependency>
 
+    <!--JDBC-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
