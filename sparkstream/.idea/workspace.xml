@@ -121,35 +121,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
+            <state relative-caret-position="352">
+              <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+              <folding>
+                <element signature="e#29#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaDirectWordCount.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/DirectKafkaWordCount.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-streaming-kafka-0-10_2.12/2.4.0/spark-streaming-kafka-0-10_2.12-2.4.0-sources.jar!/org/apache/spark/streaming/kafka010/ConsumerStrategy.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5060">
-              <caret line="255" column="24" selection-start-line="255" selection-start-column="24" selection-end-line="255" selection-end-column="24" />
+            <state relative-caret-position="308">
+              <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <folding>
+                <element signature="e#29#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,9 +171,11 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/SqlNetworkWordCount.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaReceiverWordCount.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/scriptFile.scala" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/DirectKafkaWordCount.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaDirectWordCount.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -216,6 +215,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,8 +261,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,7 +293,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.KafkaDirectWordCount">
+  <component name="RunManager" selected="Application.FlumePullWordCount">
     <configuration name="BlankFilter" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.BlankFilter" />
       <module name="sparkstream" />
@@ -308,13 +307,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DirectKafkaWordCount" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="org.apache.spark.examples.streaming.DirectKafkaWordCount" />
+    <configuration name="FlumePullWordCount" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.FlumePullWordCount" />
       <module name="sparkstream" />
-      <option name="PROGRAM_PARAMETERS" value="slave1:9092 kafka_streaming_group kafka_streaming" />
+      <option name="PROGRAM_PARAMETERS" value="master 41414" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.apache.spark.examples.streaming.*" />
+          <option name="PATTERN" value="com.gyt.sparkstream.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -322,9 +321,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ForEachWordCount2" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.ForEachWordCount2" />
+    <configuration name="FlumePushWordCount" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.FlumePushWordCount" />
       <module name="sparkstream" />
+      <option name="PROGRAM_PARAMETERS" value="0.0.0.0 41414" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.gyt.sparkstream.*" />
@@ -364,18 +364,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.BlankFilter" />
-      <item itemvalue="Application.DirectKafkaWordCount" />
-      <item itemvalue="Application.ForEachWordCount2" />
       <item itemvalue="Application.SqlNetworkWordCount" />
       <item itemvalue="Application.KafkaDirectWordCount" />
+      <item itemvalue="Application.FlumePushWordCount" />
+      <item itemvalue="Application.FlumePullWordCount" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FlumePullWordCount" />
+        <item itemvalue="Application.FlumePushWordCount" />
         <item itemvalue="Application.KafkaDirectWordCount" />
-        <item itemvalue="Application.DirectKafkaWordCount" />
         <item itemvalue="Application.SqlNetworkWordCount" />
         <item itemvalue="Application.BlankFilter" />
-        <item itemvalue="Application.ForEachWordCount2" />
       </list>
     </recent_temporary>
   </component>
@@ -393,18 +393,20 @@
       <workItem from="1557191152529" duration="21544000" />
       <workItem from="1557277068174" duration="9386000" />
       <workItem from="1557309610984" duration="2572000" />
-      <workItem from="1557314323290" duration="139000" />
+      <workItem from="1557314323290" duration="3693000" />
+      <workItem from="1557377120205" duration="12156000" />
+      <workItem from="1557449302530" duration="1668000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47489000" />
+    <option name="totallyTimeSpent" value="64867000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="984" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17487548" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1793027" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -428,7 +430,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.26452684" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.24460432" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -475,16 +477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StatefulWordCount.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
-          <folding>
-            <element signature="e#29#62#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -567,13 +559,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaDirectWordCount.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
+        <state relative-caret-position="352">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/DirectKafkaWordCount.scala" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-streaming-kafka-0-10_2.12/2.4.0/spark-streaming-kafka-0-10_2.12-2.4.0-sources.jar!/org/apache/spark/streaming/kafka010/ConsumerStrategy.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5060">
@@ -581,17 +574,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/DirectKafkaWordCount.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StatefulWordCount.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
+        <state relative-caret-position="528">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#29#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaDirectWordCount.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state relative-caret-position="484">
+          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+          <folding>
+            <element signature="e#29#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#29#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

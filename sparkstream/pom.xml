@@ -7,10 +7,11 @@
   <properties>
     <scala.version>2.11.8</scala.version>
     <kafka.version>2.1.1</kafka.version>
-    <spark.version>2.4.0</spark.version>
+    <spark.version>2.3.2</spark.version>
     <hadoop.version>2.7.3</hadoop.version>
     <hbase.version>1.4.8</hbase.version>
     <mysql.version>5.1.46</mysql.version>
+    <flume.version>1.9.0</flume.version>
   </properties>
 
 
@@ -42,6 +43,45 @@
       <version>${spark.version}</version>
     </dependency>
 
+    <!--Flume- run by spark-submit need-->
+    <dependency>
+      <groupId>org.apache.flume</groupId>
+      <artifactId>flume-ng-auth</artifactId>
+      <version>${flume.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5-20110124</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-flume-sink_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    <!--flume_pull need-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.5</version>
+    </dependency>
+
+    <!--Streaming-Flume-No version2.4.0-->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-flume_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+
+    <!--Avro-why need: run flume get a avro wrong
+      -java.lang.AbstractMethodError-->
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>1.7.4</version>
+    </dependency>
+
+    <!--Streaming-Kafka-->
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
