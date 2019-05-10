@@ -29,6 +29,12 @@
 
 
   <dependencies>
+    <dependency>
+      <groupId>org.jboss.netty</groupId>
+      <artifactId>netty</artifactId>
+      <version>3.2.4.Final</version>
+    </dependency>
+
     <!--Spark Streaming-->
     <dependency>
       <groupId>org.apache.spark</groupId>
@@ -147,13 +153,28 @@
       <version>${mysql.version}</version>
     </dependency>
 
-
     <dependency>
       <groupId>org.specs</groupId>
       <artifactId>specs</artifactId>
       <version>1.2.5</version>
       <scope>test</scope>
     </dependency>
+
+    <!--log to flume-->
+    <dependency>
+      <groupId>org.apache.flume.flume-ng-clients</groupId>
+      <artifactId>flume-ng-log4jappender</artifactId>
+      <version>${flume.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.flume</groupId>
+      <artifactId>flume-ng-sdk</artifactId>
+      <version>${flume.version}</version>
+    </dependency>
+
+
+
+
   </dependencies>
 
   <build>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="sparkstream:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="06613e4a-04f4-401f-8b46-47c65f926eb3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
@@ -79,6 +84,7 @@
       <change beforePath="$PROJECT_DIR$/sparkstream/target/classes/com/gyt/sparkstream/StatefulWordCount.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sparkstream/target/classes/log4j.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sparkstream/target/test-classes/com/gyt/sparkstream/AppTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/ForEachWordCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/ForEachWordCount.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/SqlNetworkWordCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/SqlNetworkWordCount.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StatefulWordCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StatefulWordCount.scala" afterDir="false" />
@@ -121,37 +127,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-              <folding>
-                <element signature="e#29#62#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StreamingKafkaApp.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-              <folding>
-                <element signature="e#29#62#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="286">
+              <caret line="17" column="50" lean-forward="true" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/LoggerGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/log4j.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -175,6 +200,11 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/KafkaDirectWordCount.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala" />
+        <option value="$PROJECT_DIR$/src/test/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StreamingKafkaApp.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gyt/sparkstream/LoggerGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+        <option value="$PROJECT_DIR$/src/test/java/LoggerGenerator.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -200,6 +230,7 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/vcs.xml" />
         <option value="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+        <option value="$PROJECT_DIR$/.idea/artifacts/sparkstream_jar.xml" />
       </list>
     </option>
   </component>
@@ -215,8 +246,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -240,27 +269,42 @@
               <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkstream" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-              <item name="sparkstream" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -293,20 +337,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.FlumePullWordCount">
-    <configuration name="BlankFilter" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.BlankFilter" />
-      <module name="sparkstream" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gyt.sparkstream.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.LoggerGenerator">
     <configuration name="FlumePullWordCount" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.FlumePullWordCount" />
       <module name="sparkstream" />
@@ -349,9 +380,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SqlNetworkWordCount" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.SqlNetworkWordCount" />
+    <configuration name="LoggerGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LoggerGenerator" />
       <module name="sparkstream" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamingKafkaApp" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.gyt.sparkstream.StreamingKafkaApp" />
+      <module name="sparkstream" />
+      <option name="PROGRAM_PARAMETERS" value="slave1:9092 streaming_topic_group streaming_topic" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.gyt.sparkstream.*" />
@@ -363,19 +402,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.BlankFilter" />
-      <item itemvalue="Application.SqlNetworkWordCount" />
       <item itemvalue="Application.KafkaDirectWordCount" />
       <item itemvalue="Application.FlumePushWordCount" />
       <item itemvalue="Application.FlumePullWordCount" />
+      <item itemvalue="Application.LoggerGenerator" />
+      <item itemvalue="Application.StreamingKafkaApp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LoggerGenerator" />
+        <item itemvalue="Application.StreamingKafkaApp" />
         <item itemvalue="Application.FlumePullWordCount" />
         <item itemvalue="Application.FlumePushWordCount" />
         <item itemvalue="Application.KafkaDirectWordCount" />
-        <item itemvalue="Application.SqlNetworkWordCount" />
-        <item itemvalue="Application.BlankFilter" />
       </list>
     </recent_temporary>
   </component>
@@ -395,18 +434,19 @@
       <workItem from="1557309610984" duration="2572000" />
       <workItem from="1557314323290" duration="3693000" />
       <workItem from="1557377120205" duration="12156000" />
-      <workItem from="1557449302530" duration="1668000" />
+      <workItem from="1557449302530" duration="2897000" />
+      <workItem from="1557462334281" duration="17908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64867000" />
+    <option name="totallyTimeSpent" value="84004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="984" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1793027" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18151632" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -414,7 +454,7 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3295063" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.347876" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39954075" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -459,13 +499,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/Hello.scala" />
     <entry file="file://$PROJECT_DIR$/src/main/resource.properties" />
-    <entry file="file://$PROJECT_DIR$/src/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-streaming_2.12/2.4.0/spark-streaming_2.12-2.4.0-sources.jar!/org/apache/spark/streaming/dstream/DStream.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -584,9 +617,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePushWordCount.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
+        <state relative-caret-position="470">
           <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding>
             <element signature="e#29#62#0" expanded="true" />
@@ -594,20 +639,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/FlumePullWordCount.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        <state relative-caret-position="355">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
           <folding>
             <element signature="e#29#62#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gyt/sparkstream/LoggerGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/LoggerGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/gyt/sparkstream/StreamingKafkaApp.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="17" column="50" lean-forward="true" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -617,10 +704,11 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>sparkstream:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.1452514" />
               </list>
             </option>
           </splitter-proportions>
@@ -628,10 +716,11 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.1452514" />
               </list>
             </option>
           </splitter-proportions>
