@@ -1,4 +1,4 @@
-package com.gyt.sparkstream;
+package com.gyt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

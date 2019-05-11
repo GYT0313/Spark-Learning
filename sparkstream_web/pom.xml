@@ -16,6 +16,13 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <scala.version>2.11.8</scala.version>
+        <kafka.version>2.1.1</kafka.version>
+        <spark.version>2.3.2</spark.version>
+        <hadoop.version>2.7.3</hadoop.version>
+        <hbase.version>1.4.8</hbase.version>
+        <mysql.version>5.1.46</mysql.version>
+        <flume.version>1.9.0</flume.version>
     </properties>
 
     <dependencies>
@@ -29,6 +36,33 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--Hbase-->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+
+        <!--json-->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+
+
     </dependencies>
 
     <build>
