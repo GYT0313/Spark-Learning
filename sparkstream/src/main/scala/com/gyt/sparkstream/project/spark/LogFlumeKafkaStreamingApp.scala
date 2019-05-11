@@ -1,12 +1,15 @@
 package com.gyt.sparkstream.project.spark
 
-import com.gyt.sparkstream.project.domain.ClickLog
+import com.gyt.sparkstream.project.dao.CourseClickCountDAO
+import com.gyt.sparkstream.project.domain.{ClickLog, CourseClickCount}
 import com.gyt.sparkstream.project.utils.DateUtils
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+import scala.collection.mutable.ListBuffer
 
 object LogFlumeKafkaStreamingApp {
   def main(args: Array[String]): Unit = {
@@ -16,7 +19,7 @@ object LogFlumeKafkaStreamingApp {
     }
 
     // Create context with 60 second batch interval
-    val sparkConf = new SparkConf().setAppName("LogFlumeKafkaStreamingApp").setMaster("local[2]")
+    val sparkConf = new SparkConf().setAppName("LogFlumeKafkaStreamingApp").setMaster("local[3]")
     val ssc = new StreamingContext(sparkConf, Seconds(60))
 
     // Create direct kafka stream with brokers and topics
@@ -52,7 +55,22 @@ object LogFlumeKafkaStreamingApp {
         infos(3).toInt, infos(4))
     }).filter(clickLog => clickLog.courseId != 0)
 
-    cleanData.print()
+    //cleanData.print()
+
+    // 测试三: 统计今天到现在为止实战课程统计量
+    cleanData.map(x => {
+      // HBase: rowkey  20190510_11
+      (x.time.substring(0, 8) + "_" + x.courseId, 1)
+    }).reduceByKey(_ + _).foreachRDD(rdd => {
+      rdd.foreachPartition(partitionRecords => {
+        val list = new ListBuffer[CourseClickCount]
+        partitionRecords.foreach(record => {
+          list.append(CourseClickCount(record._1, record._2))
+        })
+        CourseClickCountDAO.save(list)
+      })
+    })
+
 
     ssc.start()
     ssc.awaitTermination()
