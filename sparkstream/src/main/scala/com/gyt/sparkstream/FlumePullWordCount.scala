@@ -6,7 +6,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 
 /**
-  * Spark Streaming整合Flume的第一种方式
+  * Spark Streaming整合Flume的第二种方式
   */
 
 object FlumePullWordCount {

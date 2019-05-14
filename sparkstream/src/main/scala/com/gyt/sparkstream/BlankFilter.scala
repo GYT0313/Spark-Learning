@@ -27,7 +27,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 object BlankFilter {
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf()
-    sparkConf.setMaster("local[2]").setAppName("BlankFilter")
+    sparkConf.setAppName("BlankFilter").setMaster("local[2]")
     val ssc = new StreamingContext(sparkConf, Seconds(4))
 
     val blanks = List("zs", "ls")
