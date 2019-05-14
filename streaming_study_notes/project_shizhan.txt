@@ -1,0 +1,238 @@
+
+1. python日志生成器
+
+2. crontab：每分钟执行
+crontab -e
+*/1 * * * * /home/hadoop/data/project/log_generator.sh
+
+
+3. 日志==>Flume  对接到flume
+streaming_project.conf
+exec  memory  logger
+
+exec-memory-logger.sources = exec-source
+exec-memory-logger.sinks = logger-sink
+exec-memory-logger.channels = memory-channel
+
+exec-memory-logger.sources.exec-source.type = exec
+exec-memory-logger.sources.exec-source.command = tail -F /home/hadoop/data/project/access.log
+exec-memory-logger.sources.exec-source.shell = /bin/sh -c
+
+exec-memory-logger.channels.memory-channel.type = memory
+
+exec-memory-logger.sinks.logger-sink.type = logger
+
+exec-memory-logger.sources.exec-source.channels = memory-channel
+exec-memory-logger.sinks.logger-sink.channel = memory-channel
+
+
+
+# 启动
+bin/flume-ng agent \
+--name exec-memory-logger \
+--conf $FLUME_HOME/conf \
+--conf-file /home/hadoop/data/project/streaming_project.conf \
+-Dflume.root.logger=INFO,console
+
+
+4. 日志==>Flume==>Kafka, 对接到Kafka
+启动zookeeper、kafka
+
+
+streaming_project2.conf
+exec  memory  kafka
+
+exec-memory-logger.sources = exec-source
+exec-memory-logger.sinks = kafka-sink
+exec-memory-logger.channels = memory-channel
+
+exec-memory-logger.sources.exec-source.type = exec
+exec-memory-logger.sources.exec-source.command = tail -F /home/hadoop/data/project/access.log
+exec-memory-logger.sources.exec-source.shell = /bin/sh -c
+
+exec-memory-logger.channels.memory-channel.type = memory
+
+exec-memory-logger.sinks.kafka-sink.type = org.apache.flume.sink.kafka.KafkaSink
+exec-memory-logger.sinks.kafka-sink.kafka.topic = streaming_topic
+exec-memory-logger.sinks.kafka-sink.kafka.bootstrap.servers = slave1:9092
+exec-memory-logger.sinks.kafka-sink.kafka.flumeBatchSize = 20
+exec-memory-logger.sinks.kafka-sink.kafka.producer.acks = 1
+
+
+exec-memory-logger.sources.exec-source.channels = memory-channel
+exec-memory-logger.sinks.kafka-sink.channel = memory-channel
+
+
+# kafka消费
+kafka-console-consumer.sh --bootstrap-server slave1:9092 \
+--topic streaming_topic --from-beginning
+
+# 启动
+bin/flume-ng agent \
+--name exec-memory-logger \
+--conf $FLUME_HOME/conf \
+--conf-file /home/hadoop/data/project/streaming_project2.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+5. Spark Streaming 对接Kafka
+package com.gyt.sparkstream.project
+
+import org.apache.kafka.clients.consumer.ConsumerConfig
+import org.apache.kafka.common.serialization.StringDeserializer
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+object LogFlumeKafkaStreamingApp {
+  def main(args: Array[String]): Unit = {
+    if (args.length < 3) {
+      System.err.println("Usage: KafkaDirectWordCount <brokers> <groupId> <topics>")
+      System.exit(1)
+    }
+
+    // Create context with 60 second batch interval
+    val sparkConf = new SparkConf().setAppName("LogFlumeKafkaStreamingApp").setMaster("local[2]")
+    val ssc = new StreamingContext(sparkConf, Seconds(60))
+
+    // Create direct kafka stream with brokers and topics
+    val Array(brokers, groupId, topics) = args
+    val topicsSet = topics.split(",").toSet
+    val kafkaParams = Map[String, Object](
+      ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> brokers,
+      ConsumerConfig.GROUP_ID_CONFIG -> groupId,
+      ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer],
+      ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG -> classOf[StringDeserializer])
+    // Create direct inputStream
+    val messages = KafkaUtils.createDirectStream[String, String](
+      ssc,
+      LocationStrategies.PreferConsistent,
+      ConsumerStrategies.Subscribe[String, String](topicsSet, kafkaParams))
+    // process1 print data
+    messages.map(_.value()).count().print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+
+
+
+6. 数据处理
+-------------------------------------------
+ClickLog(7.167.124.50,20190510210401,131,404,-)
+ClickLog(167.9.124.66,20190510210401,116,200,-)
+ClickLog(187.124.8.30,20190510210401,128,404,-)
+ClickLog(12.8.29.9,20190510210401,112,500,-)
+ClickLog(187.33.19.132,20190510210401,128,500,-)
+ClickLog(124.88.30.10,20190510210401,131,200,https://www.so.com/s?&q=Storm实战)
+ClickLog(67.50.94.33,20190510210401,128,500,-)
+ClickLog(46.50.7.33,20190510210401,131,404,https://www.google.com.hk/search?&q=大数据面试)
+ClickLog(9.30.7.29,20190510210401,131,404,-)
+ClickLog(66.9.143.67,20190510210401,131,500,https://www.sogou.com/web?query=Spark SQL实战)
+
+
+
+
+##########################
+功能1：今天到现在位置统计量
+启动：Hadoop、zookeeper、Hbase
+
+Hbase表设计：
+    create 'course_clickcount','info'
+RowKey设计：
+    day_courseid
+
+
+如何使用Scala来操作Hbase：
+使用Java API操作Hbase，scala调用编写后到Java 类。
+
+
+
+
+
+
+
+
+# 功能二
+统计今天到现在为止从搜索引擎应流过来的记录
+HBase 表设计：
+    create 'course_search_clickcount','info'
+
+rowkey设计：根据业务需求
+day + search + course_id
+
+
+
+
+
+项目打包： mvn clean package -DskipTests
+[ERROR] /home/hadoop/IDEAProject/sparkstream/src/main/scala/com/gyt/sparkstream/project/dao/CourseClickCountDAO.scala:4: error: object HBaseUtils is not a member of package com.gyt.sparkstream.project.utils
+[INFO] import com.gyt.sparkstream.project.utils.HBaseUtils
+[INFO]        ^
+[ERROR] /home/hadoop/IDEAProject/sparkstream/src/main/scala/com/gyt/sparkstream/project/dao/CourseClickCountDAO.scala:23: error: not found: value HBaseUtils
+[INFO]     val table = HBaseUtils.getInstance().getTable(tableName)
+
+
+解决: 注释掉 pom.xml
+  <build>
+    <!--
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    -->
+
+
+# 提交
+spark-submit \
+--class com.gyt.sparkstream.project.spark.LogFlumeKafkaStreamingApp \
+--packages org.apache.spark:spark-streaming-kafka-0-10_2.11:2.3.2 \
+/home/hadoop/lib/sparkstream-1.0-SNAPSHOT.jar \
+slave1:9092 streaming_topic_test_group streaming_topic
+
+
+报错:
+Exception in thread "main" java.lang.RuntimeException: [download failed: net.jpountz.lz4#lz4;1.3.0!lz4.jar]
+    at org.apache.spark.deploy.SparkSubmitUtils$.resolveMavenCoordinates(SparkSubmit.scala:1306)
+    at org.apache.spark.deploy.DependencyUtils$.resolveMavenDependencies(DependencyUtils.scala:54)
+    at org.apache.spark.deploy.SparkSubmit.prepareSubmitEnvironment(SparkSubmit.scala:315)
+    at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:143)
+    at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+    at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:924)
+    at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:933)
+    at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+查看仓库发现没有该jar包, 并且不能自动下载：
+file:/home/hadoop/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar
+解决:在pom.xml中添加依赖: 
+点击import ,然后会下载:
+    <!--project run by spark-submit wrong-->
+    <dependency>
+      <groupId>net.jpountz.lz4</groupId>
+      <artifactId>lz4</artifactId>
+      <version>1.3.0</version>
+    </dependency>
+
+
+
+当运行成功后, 直到插入数据报错: 
+19/05/11 16:36:06 ERROR Executor: Exception in task 0.0 in stage 1.0 (TID 1)
+java.lang.NoClassDefFoundError: org/apache/hadoop/hbase/client/HBaseAdmin
+    at com.gyt.sparkstream.project.utils.HBaseUtils.<init>(HBaseUtils.java:28)
+    at com.gyt.sparkstream.project.utils.HBaseUtils.getInstance(HBaseUtils.java:37)
+    at com.gyt.sparkstream.project.dao.CourseClickCountDAO$.save(CourseClickCountDAO.scala:23)
+    at com.gyt.sparkstream.project.spark.LogFlumeKafkaStreamingApp$$anonfun$main$4$$anonfun$apply$1.apply(LogFlumeKafkaStreamingApp.scala:73)
+
+
+因为需要HBaseAdmin 到依赖, 这里使用--jar 指定本地jar包:
+# 提交
+spark-submit \
+--jars $(echo /home/hadoop/hbase-1.4.8/lib/*.jar | tr ' ' ',') \
+--class com.gyt.sparkstream.project.spark.LogFlumeKafkaStreamingApp \
+--packages org.apache.spark:spark-streaming-kafka-0-10_2.11:2.3.2 \
+/home/hadoop/lib/sparkstream-1.0-SNAPSHOT.jar \
+slave1:9092 streaming_topic_test_group streaming_topic
+
+
+
+
+

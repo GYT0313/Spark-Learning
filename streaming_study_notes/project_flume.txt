@@ -1,0 +1,188 @@
+配置示例一：
+netcat
+
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = master
+a1.sources.r1.port = 44444
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+
+
+
+# 启动：
+bin/flume-ng agent \
+--name a1 \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/example.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+
+
+配置示例二：
+exec 
+
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = exec
+a1.sources.r1.command = tail -F /home/hadoop/data/data.log
+a1.sources.r1.shell = /bin/sh -c
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+
+# 启动：
+bin/flume-ng agent \
+--name a1 \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/exec-memory-logger.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+
+配置示例三：
+HDFS
+
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = exec
+a1.sources.r1.command = tail -F /home/hadoop/data/data.log
+a1.sources.r1.shell = /bin/sh -c
+
+# Describe the sink
+a1.sinks.k1.type = hdfs
+a1.sinks.k1.hdfs.path = hdfs://master:9000/flume
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+
+启动：
+bin/flume-ng agent \
+--name a1 \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/exec-memory-logger.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+
+
+
+配置示例四：
+exec-memory-avro.conf
+
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+exec-memory-avro.sources = exec-source
+exec-memory-avro.sinks = avro-sink
+exec-memory-avro.channels = memory-channel
+
+# Describe/configure the source
+exec-memory-avro.sources.exec-source.type = exec
+exec-memory-avro.sources.exec-source.command = tail -F /home/hadoop/data/data.log
+exec-memory-avro.sources.exec-source.shell = /bin/sh -c
+
+# Describe the sink
+exec-memory-avro.sinks.avro-sink.type = avro
+exec-memory-avro.sinks.avro-sink.hostname = master
+exec-memory-avro.sinks.avro-sink.port = 44444
+
+# Use a channel which buffers events in memory
+exec-memory-avro.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+exec-memory-avro.sources.exec-source.channels = memory-channel
+exec-memory-avro.sinks.avro-sink.channel = memory-channel
+
+
+
+
+avro-memory-logger.conf
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+avro-memory-logger.sources = avro-source
+avro-memory-logger.sinks = logger-sink
+avro-memory-logger.channels = memory-channel
+
+# Describe/configure the source
+avro-memory-logger.sources.avro-source.type = avro
+avro-memory-logger.sources.avro-source.bind = master
+avro-memory-logger.sources.avro-source.port = 44444
+
+# Describe the sink
+avro-memory-logger.sinks.logger-sink.type = logger
+
+# Use a channel which buffers events in memory
+avro-memory-logger.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+avro-memory-logger.sources.avro-source.channels = memory-channel
+avro-memory-logger.sinks.logger-sink.channel = memory-channel
+
+
+# 先启动：
+bin/flume-ng agent \
+--name avro-memory-logger \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/avro-memory-logger.conf \
+-Dflume.root.logger=INFO,console
+
+
+# 再启动
+bin/flume-ng agent \
+--name exec-memory-avro \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/exec-memory-avro.conf \
+-Dflume.root.logger=INFO,console
+
+
+

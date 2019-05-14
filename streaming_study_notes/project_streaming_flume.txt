@@ -1,0 +1,89 @@
+# push .........flume_push_streaming.conf
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+simple-agent.sources = netcat-source
+simple-agent.sinks = avro-sink
+simple-agent.channels = memory-channel
+
+# Describe/configure the source
+simple-agent.sources.netcat-source.type = netcat
+simple-agent.sources.netcat-source.bind = master
+simple-agent.sources.netcat-source.port = 44444
+
+# Describe the sink
+simple-agent.sinks.avro-sink.type = avro
+simple-agent.sinks.avro-sink.hostname = master
+simple-agent.sinks.avro-sink.port = 41414
+
+# Use a channel which buffers events in memory
+simple-agent.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+simple-agent.sources.netcat-source.channels = memory-channel
+simple-agent.sinks.avro-sink.channel = memory-channel
+
+
+# 运行
+bin/flume-ng agent \
+--name simple-agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/flume_push_streaming.conf \
+-Dflume.root.logger=INFO,console
+
+
+# 提交到服务器
+spark-submit \
+--class com.gyt.sparkstream.FlumePushWordCount \
+--master local[2] \
+--packages org.apache.spark:spark-streaming-flume_2.11:2.3.2 \
+/home/hadoop/lib/sparkstream-1.0-SNAPSHOT.jar \
+master 41414
+
+
+
+
+
+# pull......flume_pull_streaming.conf
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+simple-agent.sources = netcat-source
+simple-agent.sinks = spark-sink
+simple-agent.channels = memory-channel
+
+# Describe/configure the source
+simple-agent.sources.netcat-source.type = netcat
+simple-agent.sources.netcat-source.bind = master
+simple-agent.sources.netcat-source.port = 44444
+
+# Describe the sink
+simple-agent.sinks.spark-sink.type = org.apache.spark.streaming.flume.sink.SparkSink
+simple-agent.sinks.spark-sink.hostname = master
+simple-agent.sinks.spark-sink.port = 41414
+
+# Use a channel which buffers events in memory
+simple-agent.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+simple-agent.sources.netcat-source.channels = memory-channel
+simple-agent.sinks.spark-sink.channel = memory-channel
+
+
+# 运行
+bin/flume-ng agent \
+--name simple-agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/flume_pull_streaming.conf \
+-Dflume.root.logger=INFO,console
+
+
+# 提交到服务器
+spark-submit \
+--class com.gyt.sparkstream.FlumePullWordCount \
+--master local[2] \
+--packages org.apache.spark:spark-streaming-flume_2.11:2.3.2 \
+/home/hadoop/lib/sparkstream-1.0-SNAPSHOT.jar \
+master 41414
+
+

@@ -1,0 +1,134 @@
+streaming.conf
+
+# Name the components on this agent
+agent1.sources = avro-source
+agent1.sinks = log-sink
+agent1.channels = logger-channel
+
+# Describe/configure the source
+agent1.sources.avro-source.type = avro
+agent1.sources.avro-source.bind = master
+agent1.sources.avro-source.port = 41414
+
+# Describe the sink
+agent1.sinks.log-sink.type = logger
+
+# Use a channel which buffers events in memory
+agent1.channels.logger-channel.type = memory
+
+# Bind the source and sink to the channel
+agent1.sources.avro-source.channels = logger-channel
+agent1.sinks.log-sink.channel = logger-channel
+
+
+
+# 启动
+bin/flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+
+
+
+
+
+log4j:ERROR Could not instantiate class [org.apache.flume.clients.log4jappender.Log4jAppender].
+java.lang.ClassNotFoundException: org.apache.flume.clients.log4jappender.Log4jAppender
+    at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+    at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:338)
+    at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+    at java.lang.Class.forName0(Native Method)
+    at java.lang.Class.forName(Class.java:264)
+    at org.apache.log4j.helpers.Loader.loadClass(Loader.java:198)
+    at org.apache.log4j.helpers.OptionConverter.instantiateByClassName(OptionConverter.java:327)
+    at org.apache.log4j.helpers.OptionConverter.instantiateByKey(OptionConverter.java:124)
+    at org.apache.log4j.PropertyConfigurator.parseAppender(PropertyConfigurator.java:785)
+    at org.apache.log4j.PropertyConfigurator.parseCategory(PropertyConfigurator.java:768)
+    at org.apache.log4j.PropertyConfigurator.configureRootCategory(PropertyConfigurator.java:648)
+    at org.apache.log4j.PropertyConfigurator.doConfigure(PropertyConfigurator.java:514)
+    at org.apache.log4j.PropertyConfigurator.doConfigure(PropertyConfigurator.java:580)
+    at org.apache.log4j.helpers.OptionConverter.selectAndConfigure(OptionConverter.java:526)
+    at org.apache.log4j.LogManager.<clinit>(LogManager.java:127)
+    at org.apache.log4j.Logger.getLogger(Logger.java:104)
+    at LoggerGenerator.<clinit>(LoggerGenerator.java:9)
+log4j:ERROR Could not instantiate appender named "flume".
+
+
+
+
+# kafka 创建主题
+kafka-topics.sh --create --zookeeper master:2181 \
+--replication-factor 1 --partitions 1 --topic streaming_topic
+
+# 终端1-生产者
+kafka-console-producer.sh --broker-list slave1:9092 \
+--topic streaming_topic
+
+
+
+# kafka sink  -- streaming2.conf
+
+
+# Name the components on this agent
+agent1.sources = avro-source
+agent1.channels = logger-channel
+agent1.sinks = kafka-sink
+
+# Describe/configure the source
+agent1.sources.avro-source.type = avro
+agent1.sources.avro-source.bind = master
+agent1.sources.avro-source.port = 41414
+
+# Describe the sink
+agent1.sinks.kafka-sink.type = org.apache.flume.sink.kafka.KafkaSink
+agent1.sinks.kafka-sink.kafka.topic = streaming_topic
+agent1.sinks.kafka-sink.kafka.bootstrap.servers = slave1:9092
+agent1.sinks.kafka-sink.kafka.flumeBatchSize = 40
+agent1.sinks.kafka-sink.kafka.producer.acks = 1
+
+# Use a channel which buffers events in memory
+agent1.channels.logger-channel.type = memory
+
+# Bind the source and sink to the channel
+agent1.sources.avro-source.channels = logger-channel
+agent1.sinks.kafka-sink.channel = logger-channel
+
+
+# 启动
+bin/flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming2.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+
+
+# kafka消费
+kafka-console-consumer.sh --bootstrap-server slave1:9092 \
+--topic streaming_topic --from-beginning
+
+
+
+本地测试运行了两个：log、streaming_kafka
+
+提交到服务器：
+1.打包jar包，执行log
+2.flume、kafka一样
+3. spark streaming 打包提交
+
+# 运行jar
+java -jar logger-generator.jar  com.gyt.sparkstream.LoggerGenerator
+
+# spark-submit
+spark-submit \
+--class com.gyt.sparkstream.StreamingKafkaApp \
+--master local[2] \
+--name KafkaDirectWordCount \
+--packages org.apache.spark:spark-streaming-kafka-0-10_2.11:2.4.0 \
+/home/hadoop/lib/sparkstream-1.0-SNAPSHOT.jar \
+slave1:9092 streaming_topic_group streaming_topic
+
+
+
+
